@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './TransactionSummary.css'; // Importing the CSS file
-import '/Users/gabrielleodhiambo/Development/phase-5test/Instapay/client/src/Components/Shared/Footer.js';
-import '/Users/gabrielleodhiambo/Development/phase-5test/Instapay/client/src/Components/Shared/Navbar.js'
+import './Shared/Footer.js';
+import './Shared/Navbar.js'
 
 
 const TransactionSummary = () => {
