@@ -1,0 +1,56 @@
+body {
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    background-color: #ADD7F6; /* Set background color for the whole page */
+  }
+  
+.transaction-summary {
+    font-family: Arial, sans-serif;
+    /* background-color: #ADD7F6; Light gray background */
+    padding: 20px; /* Add padding for spacing */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  }
+  
+  .transaction-summary h2 {
+    color: #3F8ECC; /* Header color */
+    margin-bottom: 16px; /* Add spacing between header and table */
+  }
+  
+  .transaction-summary table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .transaction-summary th,
+  .transaction-summary td {
+    padding: 12px;
+    border: 1px solid #ddd;
+  }
+  
+  .transaction-summary th {
+    background-color: #3F8ECC; /* Header background color */
+    color: white; /* Header text color */
+  }
+  
+  .transaction-summary td.negative {
+    color: red; /* Negative amount text color */
+  }
+  .btn {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: #aee7ff; /* Baby blue color */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 30px
+  }
+  
+  .btn:hover {
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  }
+  
+  
