@@ -15,28 +15,28 @@ import AdminDashboard from './Components/Dashboard/Admin/AdminDashBoard';
 import UserManagement from './Components/Dashboard/Admin/UserManagement';
 
 
-function App() {
+const Home = () => {
+  return <h1>Welcome to the Application</h1>;
+};
+
+const App = () => {
   const [beneficiaries, setBeneficiaries] = useState([]);
-  //Defining the home component
-  const Home = () => {
-    return <h1>Welcome to the Application</h1>;
+  const [user, setUser] = useState({
+    username: 'Linet Chepngeno',
+    email: 'linetmutaih@gmail.com',
+    password: 'password123',
+  });
+
+  const updateUser = (updatedUser) => {
+    console.log('Updated user:', updatedUser);
+    // setUser(updatedUser);
   };
 
-  const App = () => {
-    const [user, setUser] = useState({
-      username: 'Linet Chepngeno',
-      email: 'linetmutai@gmail.com',
-      password: 'password123',
-    });
-  
-    const updateUser = (updatedUser) => {
-      setUser(updatedUser);
-    };
-  
+  const ProfileTest = () => {
     return (
       <div>
-        <h1>My App</h1>
-        <Profile user={user} updateUser={updateUser} /> {/* Render the Profile component */}
+        <h1>Profile Test</h1>
+        <Profile user={user} updateUser={updateUser} isTest={true}/> {/* Render the Profile component */}
       </div>
     );
   };
