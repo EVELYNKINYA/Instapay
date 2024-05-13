@@ -1,0 +1,122 @@
+import React, { useState } from 'react';
+
+function App() {
+  const [loginData, setLoginData] = useState({ email: '', password: '' });
+  const [signupData, setSignupData] = useState({ email: '', firstName: '', lastName: '', password: '' });
+  const [showSignup, setShowSignup] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleLoginInputChange = (e) => {
+    const { name, value } = e.target;
+    setLoginData({ ...loginData, [name]: value });
+  };
+
+  const handleSignupInputChange = (e) => {
+    const { name, value } = e.target;
+    setSignupData({ ...signupData, [name]: value });
+  };
+
+  const handleLoginSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const response = await fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(loginData),
+    });
+
+    if (response.ok) {
+      // Authentication successful
+      console.log('Login successful');
+      setErrorMessage('');
+      
+    } else {
+      // Authentication failed
+      const errorData = await response.json();
+      setErrorMessage(errorData.message);
+    }
+  } catch (error) {
+    console.error('Error during login:', error);
+    setErrorMessage('An error occurred during login.');
+  }
+};
+
+  const handleSignupSubmit = async (e) => {
+  e.preventDefault();
+  
+  // Client-side validation
+  if (!signupData.email || !signupData.firstName || !signupData.lastName || !signupData.password) {
+    setErrorMessage('Please enter all required information');
+    return;
+  }
+  if (!isValidEmail(signupData.email)) {
+    setErrorMessage('Please enter a valid email address');
+    return;
+  }
+  
+  try {
+    // Send signup data to the backend server
+    const response = await fetch('/api/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(signupData),
+    });
+
+    if (response.ok) {
+      // Signup successful
+      console.log('Signup successful');
+      setErrorMessage('');
+    } 
+    else {
+      // Signup failed
+      const errorData = await response.json();
+      setErrorMessage(errorData.message);
+    }
+  } catch (error) {
+    console.error('Error during signup:', error);
+    setErrorMessage('An error occurred during signup.');
+  }
+};
+
+const isValidEmail = (email) => {
+  // Basic email validation regex
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
+
+
+  return (
+    // <div className="App" style={{ background: 'linear-gradient(to bottom right, #E0F2FF, #3F8EFC)' }}>
+      <div className="container">
+        <h1>Instapay</h1>
+        {showSignup ? (
+          <form onSubmit={handleSignupSubmit}>
+            <h2>Sign Up</h2>
+            <input type="email" name="email" placeholder="Email" value={signupData.email} onChange={handleSignupInputChange} required />
+            <input type="text" name="firstName" placeholder="First Name" value={signupData.firstName} onChange={handleSignupInputChange} required />
+            <input type="text" name="lastName" placeholder="Last Name" value={signupData.lastName} onChange={handleSignupInputChange} required />
+            <input type="password" name="password" placeholder="Password" value={signupData.password} onChange={handleSignupInputChange} required />
+            <button type="submit">Sign Up</button>
+            <p>Already have an account? <button onClick={() => setShowSignup(false)}>Login here</button></p>
+          </form>
+        ) : (
+          <form onSubmit={handleLoginSubmit}>
+            <h2>Login</h2>
+            <input type="text" name="email" placeholder="Email or Name" value={loginData.email} onChange={handleLoginInputChange} required />
+            <input type="password" name="password" placeholder="Password" value={loginData.password} onChange={handleLoginInputChange} required />
+            <button type="submit">Login</button>
+            <p>Do not have an account? <button onClick={() => setShowSignup(true)}>Sign up now!</button></p>
+          </form>
+        )}
+        {errorMessage && <div className="error">{errorMessage}</div>}
+      </div>
+    // </div>
+  );
+}
+
+
