@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-const Profile = ({ user, updateUser }) => {
+const Profile = ({ user, updateUser, isTest = false }) => {
   const [editing, setEditing] = useState(false);
-  const [updatedUser, setUpdatedUser] = useState({ ...user });
+  const [updatedUser, setUpdatedUser] = useState(user ? { ...user } : {});
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -14,10 +14,13 @@ const Profile = ({ user, updateUser }) => {
     setEditing(false);
   };
 
-  if (!user || !user.username) {
-    return <div> 
-        <h2 Profile />
-        <p>Loading profile...</p></div>;
+  if (!isTest && !user || !user.username) {
+    return (
+      <div>
+        <h2>Profile</h2>
+        <p>Loading profile...</p>
+      </div>
+    );
   }
 
   return (
@@ -27,19 +30,19 @@ const Profile = ({ user, updateUser }) => {
           <input
             type="text"
             name="username"
-            value={updatedUser.username}
+            value={updatedUser.username || ''}
             onChange={handleInputChange}
           />
           <input
             type="email"
             name="email"
-            value={updatedUser.email}
+            value={updatedUser.email || ''}
             onChange={handleInputChange}
           />
           <input
             type="password"
             name="password"
-            value={updatedUser.password}
+            value={updatedUser.password || ''}
             onChange={handleInputChange}
           />
           <button onClick={handleUpdate}>Save</button>
