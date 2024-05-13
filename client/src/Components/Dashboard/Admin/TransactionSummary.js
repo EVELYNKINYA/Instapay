@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import './TransactionSummary.css'; // Importing the CSS file
-import './Shared/Footer.js';
-import './Shared/Navbar.js'
 
 
 const TransactionSummary = () => {
