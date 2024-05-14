@@ -8,15 +8,18 @@ import Beneficiaries from './Components/Dashboard/User/Beneficiaries';
 import SendMoney from './Components/Dashboard/User/SendMoneyForm';
 import Profile from './Components/Dashboard/User/Profile';
 import Navbar from './Components/Shared/Navbar';
+import Login from './Components/Auth/Login';
+import Signup from './Components/Auth/Signup';
 import Footer from './Components/Shared/Footer';
 import Loader from './Components/Shared/Loader';
 import Modal from './Components/Shared/Modal';
 import AdminDashboard from './Components/Dashboard/Admin/AdminDashBoard';
+import AdminDashboardLayout from './Components/Dashboard/Admin/AdminDashboardLayout';
 import UserManagement from './Components/Dashboard/Admin/UserManagement';
 
 
 const Home = () => {
-  return <h1>Welcome to the Application</h1>;
+  return <h1>Welcome to Instapay</h1>;
 };
 
 const App = () => {
@@ -43,24 +46,29 @@ const App = () => {
 
   return (
     <div className="App">
-      <Router>
-      <div>
-        <Navbar/>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="/admin/user-management" element={<UserManagement />} />
-          <Route path="dashboard/beneficiaries" element={<Beneficiaries
-          beneficiaries={beneficiaries}
-          setBeneficiaries={setBeneficiaries} />} />
-          <Route path="dashboard/profile" element={<Profile />} />
-          <Route path="dashboard/send-money" element={<SendMoney beneficiaries={beneficiaries}/>} />
-          <Route path="dashboard/transaction-summary" element={<TransactionSummary />} />
-        </Routes >
-        <Loader />
-        <Modal />
-      </div>
-    </Router>
+    <Router>
+  <div>
+    <Navbar />
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/admin/dashboard" element={<AdminDashboardLayout />}>
+        <Route index element={<AdminDashboard />} />
+        <Route path="transaction-summary" element={<TransactionSummary />} />
+        <Route path="user-management" element={<UserManagement />} />
+      </Route>
+      <Route path="dashboard/beneficiaries" element={<Beneficiaries beneficiaries={beneficiaries} setBeneficiaries={setBeneficiaries} />} />
+      <Route path="dashboard/user/profile" element={<Profile />} />
+      <Route path="dashboard/send-money" element={<SendMoney beneficiaries={beneficiaries} />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
+      
+    </Routes>
+    <Footer />
+    <Loader />
+    <Modal />
+    
+  </div>
+</Router>
     </div>
   );
 }

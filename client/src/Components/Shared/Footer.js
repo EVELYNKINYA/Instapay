@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap';
 
 const Footer = () => {
@@ -10,12 +11,20 @@ const Footer = () => {
             <p>&copy; {new Date().getFullYear()} Instapay</p>
           </Col>
           <Col md={3}>
-            <h6>Links</h6>
-            <ul className="list-unstyled">
-              <li><a href="#" className="text-light">Privacy Policy</a></li>
-              <li><a href="#" className="text-light">Terms &amp; Conditions</a></li>
-            </ul>
-          </Col>
+        <h6>Links</h6>
+        <ul className="list-unstyled">
+          <li>
+            <Link to="/privacy-policy" className="text-light">
+              Privacy Policy
+            </Link>
+          </li>
+          <li>
+            <Link to="/terms-and-conditions" className="text-light">
+              Terms &amp; Conditions
+            </Link>
+          </li>
+        </ul>
+      </Col>
           <Col md={3}>
             <h6>Follow Us</h6>
             <ul className="list-unstyled">
