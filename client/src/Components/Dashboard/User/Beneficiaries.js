@@ -77,7 +77,7 @@ const Beneficiaries = () => {
             <input
               type="text"
               id="account_number"
-              name="v"
+              name="account_number"
               value={newBeneficiary.account_number}
               onChange={handleInputChange}
               required
